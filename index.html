@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMarket — Avtomobillar olami</title>
+    <meta name="description" content="Orzuingizdagi avtomobilni AutoMarket saytidan toping.">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="#home" class="logo">AUTO<span>MARKET</span></a>
+
+        <nav class="navigation">
+            <a href="#home">Bosh sahifa</a>
+            <a href="#cars">Avtomobillar</a>
+            <a href="#about">Biz haqimizda</a>
+        </nav>
+
+        <button class="cart-button" id="cartButton">
+            🛒 Savatcha <span id="cartCount">0</span>
+        </button>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="hero-label">AVTOMOBILLAR OLAMIGA XUSH KELIBSIZ</span>
+                <h1>Orzuingizdagi avtomobilni <span>toping.</span></h1>
+                <p>
+                    Zamonaviy, ishonchli va qulay avtomobillar.
+                    O'zingizga mos mashinani tanlang va xarid uchun ariza qoldiring.
+                </p>
+                <a href="#cars" class="main-button">Mashinalarni ko'rish ↗</a>
+
+                <div class="hero-stats">
+                    <div>
+                        <strong>8+</strong>
+                        <span>Avtomobil modeli</span>
+                    </div>
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Onlayn katalog</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85"
+                    alt="Zamonaviy sport avtomobili"
+                >
+                <div class="image-caption">
+                    <span>YOUR NEXT CAR</span>
+                    <strong>Yangi imkoniyatlar sari.</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="cars-section" id="cars">
+            <div class="section-heading">
+                <span class="section-label">BIZNING KATALOG</span>
+                <h2>O'zingizga mos mashinani tanlang</h2>
+                <p>Avtomobillarni ko'ring, narxlarini solishtiring va savatchaga qo'shing.</p>
+            </div>
+
+            <div class="filters">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="🔎 Marka yoki modelni qidiring..."
+                    aria-label="Mashina qidirish"
+                >
+
+                <select id="brandFilter" aria-label="Markani tanlash">
+                    <option value="all">Barcha markalar</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="BYD">BYD</option>
+                </select>
+
+                <select id="typeFilter" aria-label="Mashina turini tanlash">
+                    <option value="all">Barcha turlar</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Elektromobil">Elektromobil</option>
+                    <option value="Sport">Sport</option>
+                </select>
+            </div>
+
+            <div class="cars-grid" id="carsGrid"></div>
+        </section>
+
+        <section class="about-section" id="about">
+            <span class="section-label">NIMA UCHUN AUTOMARKET?</span>
+            <h2>Avtomobil tanlash endi osonroq.</h2>
+            <div class="benefits">
+                <article>
+                    <span>🚘</span>
+                    <h3>Keng tanlov</h3>
+                    <p>Turli marka va modellardagi avtomobillarni bir joyda ko'ring.</p>
+                </article>
+                <article>
+                    <span>💰</span>
+                    <h3>Narxlar katalogi</h3>
+                    <p>Ko'rsatilgan narxlarni taqqoslab, o'zingizga mos variantni tanlang.</p>
+                </article>
+                <article>
+                    <span>📋</span>
+                    <h3>Oson ariza</h3>
+                    <p>Tanlagan avtomobilingiz uchun aloqa ma'lumotlarini qoldiring.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#home" class="logo">AUTO<span>MARKET</span></a>
+        <p>© 2026 AutoMarket. Demo avtomobil katalogi.</p>
+    </footer>
+
+    <!-- Savatcha oynasi -->
+    <div class="modal" id="cartModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Tanlangan avtomobillar</h2>
+                <button class="close-button" id="closeCart" aria-label="Yopish">✕</button>
+            </div>
+
+            <div id="cartItems"></div>
+
+            <div class="cart-total">
+                <span>Umumiy summa:</span>
+                <strong id="cartTotal">0 $</strong>
+            </div>
+
+            <button class="main-button full-button" id="checkoutButton">
+                Xarid uchun ariza
+            </button>
+        </div>
+    </div>
+
+    <!-- Xarid arizasi -->
+    <div class="modal" id="orderModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Avtomobil uchun ariza</h2>
+                <button class="close-button" id="closeOrder" aria-label="Yopish">✕</button>
+            </div>
+
+            <form id="orderForm">
+                <label for="customerName">Ism-familiyangiz</label>
+                <input
+                    id="customerName"
+                    name="name"
+                    type="text"
+                    placeholder="Ismingizni kiriting"
+                    required
+                >
+
+                <label for="customerPhone">Telefon raqamingiz</label>
+                <input
+                    id="customerPhone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+998 90 123 45 67"
+                    pattern="\+?[0-9\s()-]{9,20}"
+                    required
+                >
+
+                <label for="customerMessage">Qo'shimcha izoh</label>
+                <textarea
+                    id="customerMessage"
+                    name="message"
+                    rows="3"
+                    placeholder="Masalan, mashinani ko'rishga kelmoqchiman..."
+                ></textarea>
+
+                <div id="orderSummary" class="order-summary"></div>
+
+                <button type="submit" class="main-button full-button">
+                    Arizani tasdiqlash
+                </button>
+            </form>
+
+            <p class="form-note">
+                Demo rejim: ariza hozircha serverga yuborilmaydi.
+            </p>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
